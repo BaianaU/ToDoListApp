@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
+    
+    @StateObject var viewModel = LoginViewViewModel()
     
     var body: some View {
         NavigationStack {
@@ -11,10 +11,9 @@ struct LoginView: View {
                     title: "To Do List",
                     subtitle: "Get things done",
                     backgroundColors: [
-                                            Color(red: 38 / 255, green: 66 / 255, blue: 85 / 255),
-                                            Color(red: 20 / 255, green: 45 / 255, blue: 65 / 255)
-                                            
-                                        ],
+                        Color(red: 38 / 255, green: 66 / 255, blue: 85 / 255),
+                        Color(red: 20 / 255, green: 45 / 255, blue: 65 / 255)
+                    ],
                     subtitleColor: Color(red: 211 / 255, green: 122 / 255, blue: 28 / 255)
                 )
                 
@@ -22,16 +21,23 @@ struct LoginView: View {
                     Spacer()
                     Spacer()
                     
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundColor(.red)
+                            .padding(.bottom, 10)
+                    }
+                    
                     VStack(spacing: 15) {
-                        TextField("Email Address", text: $email)
+                        TextField("Email Address", text: $viewModel.email)
                             .padding()
                             .background(Color.white.opacity(0.9))
                             .cornerRadius(10)
                             .textFieldStyle(PlainTextFieldStyle())
                             .autocapitalization(.none)
                             .padding(.horizontal, 30)
+                            .autocorrectionDisabled()
                         
-                        SecureField("Password", text: $password)
+                        SecureField("Password", text: $viewModel.password)
                             .padding()
                             .background(Color.white.opacity(0.9))
                             .cornerRadius(10)
@@ -39,17 +45,13 @@ struct LoginView: View {
                             .padding(.horizontal, 30)
                     }
                     
-                    Button(action: {
-                        // Login-action
-                    }) {
-                        Text("Log In")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(width: 200, height: 50)
-                            .background(Color(red: 211 / 255, green: 122 / 255, blue: 28 / 255))
-                            .cornerRadius(10)
-                            .padding(.top, 20)
-                    }
+                    TLButton(
+                        title: "Log In",
+                        background: Color(red: 211 / 255, green: 122 / 255, blue: 28 / 255),
+                        action: {
+                            viewModel.login()
+                        }
+                    )
                     
                     Spacer()
                     

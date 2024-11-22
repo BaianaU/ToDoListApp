@@ -13,7 +13,7 @@
 	<key>PROJECT_ID</key>
 	<string>todolistapp-1760f</string>
 	<key>STORAGE_BUCKET</key>
-	<string>todolistapp-1760f.appspot.com</string>
+	<string>todolistapp-1760f.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
