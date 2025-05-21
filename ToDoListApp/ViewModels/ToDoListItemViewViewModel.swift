@@ -14,7 +14,7 @@ class ToDoListItemViewViewModel: ObservableObject {
     init() {}
     
     func toggleIsDone(item: ToDoListItem) {
-        // Skapa en kopia av objektet och uppdatera `isDone`
+        // Skapar en kopia av objektet och uppdatera `isDone`
         var itemCopy = item
         itemCopy.setDone(!item.isDone)
         
